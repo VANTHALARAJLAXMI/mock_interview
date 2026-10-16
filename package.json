@@ -1,0 +1,16 @@
+{
+  "name": "ai-mock-interview-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-Powered Mock Interview Assistant: React + Vite frontend, Express backend, Ollama Cloud API, browser speech features.",
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "engines": { "node": ">=18.18" }
+}

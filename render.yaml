@@ -1,0 +1,27 @@
+# Render Blueprint: one web service serves the API and the built React app.
+# API calls stay on the same origin (/api/...), so the client does not need a
+# separate API host. Push this repo, then in Render: New > Blueprint.
+services:
+  - type: web
+    name: mock-interview
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: OLLAMA_MODEL
+        value: gpt-oss:120b
+      # Paste your key in the Render dashboard. Leave empty to run in demo mode.
+      - key: OLLAMA_API_KEY
+        sync: false
+      # Optional. Only needed if the browser is on a different origin than this service.
+      - key: CLIENT_ORIGIN
+        sync: false
+      # Optional. Without it, interview history stays in the browser.
+      - key: MONGODB_URI
+        sync: false
